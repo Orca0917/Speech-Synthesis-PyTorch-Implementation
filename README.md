@@ -1,2 +1,15 @@
-# Speech-Synthesis-PyTorch-Implementation
-A repository where I studied speech synthesis systems using deep learning and implemented them with pytorch.
+# Introduction
+
+This repository is dedicated to exploring and implementing Text-to-Speech (TTS) systems using PyTorch. It contains source codes of my journey into the realm of voice synthesis. Most implementations are done using Jupyter Notebooks (`.ipynb` files), and dependencies for each project are organized within their respective folders.
+
+<br>
+
+# Index
+
+Below is a list of TTS models that have been completed or are currently in progress. For external repositories referenced during implementation, please consult the notebook files in each folder. Should you encounter any issues or errors while running the code, kindly leave a message in the `issues` section, and your feedback will be greatly appreciated.
+
+<br>
+
+| id | name | paper | blog | year | status |
+|:--:|:--:|:--:|:--:|:--:|:--:|
+| 1 | tacotron | [ 🔗 link](https://arxiv.org/abs/1703.10135) | [ 🔗 link](https://orca0917.github.io/posts/Tacotron/) | 2017 | <code> 🟡 in progress </code> |
