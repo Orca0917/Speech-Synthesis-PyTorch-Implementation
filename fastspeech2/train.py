@@ -21,7 +21,6 @@ logger = logging.getLogger(__name__)
 #     learning_rate = model_dim ** -0.5 * min(step ** -0.5, step * warmup_steps ** -1.5)
 #     return learning_rate
 
-
 def show_melspectrogram(melspectrogram):
     fig, ax = plt.subplots(1, 1)
     S_dB    = librosa.power_to_db(melspectrogram, ref=np.max)
@@ -51,7 +50,7 @@ def train(args):
         model.train()
         for x, y in tqdm(train_dataloader, total=len(train_dataloader)):
 
-            out = model(x)
+            pred_duration, pred_mel = model(x)
             break
             pass
             # logger.info(f"Phoneme sequence's shape  : {x.shape}")
@@ -77,6 +76,16 @@ if __name__ == '__main__':
     args.add_argument('--encoder_conv1d_kernel', type=list, default=[9, 1])
     args.add_argument('--encoder_conv1d_filter_size', type=int, default=1024)
     args.add_argument('--encoder_attention_heads', type=int, default=2)
+    args.add_argument('--encoder_decoder_dropout', type=float, default=0.1)
+    args.add_argument('--variance_predictor_conv1d_kernel', type=list, default=[3, 3])
+    args.add_argument('--variance_predictor_conv1d_filter_size', type=int, default=256)
+    args.add_argument('--variance_predictor_dropout', type=float, default=0.5)
+    args.add_argument('--decoder_layers', type=int, default=4)
+    args.add_argument('--decoder_hidden', type=int, default=256)
+    args.add_argument('--decoder_conv1d_kernel', type=list, default=[9, 1])
+    args.add_argument('--decoder_conv1d_filter_size', type=int, default=1024)
+    args.add_argument('--decoder_attention_heads', type=int, default=2)
+    args.add_argument('--mel_spectrogram_dim', type=int, default=80)
     args = args.parse_args()
 
     args.logger = logger

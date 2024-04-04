@@ -5,39 +5,40 @@ from model.attention import MultiHeadAttention
 
 
 class Conv1D(nn.Module):
-    def __init__(self, args):
+    def __init__(self, args, in_dim, out_dim, kernel_size):
         super(Conv1D, self).__init__()
-        self.args = args
-        self.logger = args.logger
-
-        self.conv_1d_1 = nn.Conv1d(in_channels=args.encoder_hidden, 
-                                   out_channels=args.encoder_conv1d_filter_size,
-                                   kernel_size=args.encoder_conv1d_kernel[0],
-                                   padding=(args.encoder_conv1d_kernel[0]-1) // 2)
+        self.args       = args
+        self.logger     = args.logger
+        self.conv       = nn.Conv1d(in_channels=in_dim,
+                                    out_channels=out_dim,
+                                    kernel_size=kernel_size,
+                                    padding=(kernel_size-1) // 2)
         
-        self.conv_1d_2 = nn.Conv1d(in_channels=args.encoder_conv1d_filter_size,
-                                   out_channels=args.encoder_hidden,
-                                   kernel_size=args.encoder_conv1d_kernel[1],
-                                   padding=(args.encoder_conv1d_kernel[1]-1) // 2)
-
     def forward(self, input):
         self.logger.info(f"Class: Conv1D :: input: {input.shape}")  # (16, 139, 256)
         input = input.transpose(1, 2)
-        input = self.conv_1d_1(input)
-        input = self.conv_1d_2(input)
+        input = self.conv_1d(input)
         input = input.transpose(1, 2)
         return input
 
 
 class FeedForwardTransformer(nn.Module):
-    def __init__(self, args):
+    def __init__(self, args, hidden, kernel, filter, n_head, p):
         super(FeedForwardTransformer, self).__init__()
         self.args                   = args
         self.logger                 = args.logger
-        self.multi_head_attention   = MultiHeadAttention(args=args)
-        self.conv_1d                = Conv1D(args=args)
-        self.layer_norm             = nn.LayerNorm(args.encoder_hidden)
-        self.dropout                = nn.Dropout(p=0.5)
+        self.multi_head_attention   = MultiHeadAttention(args=args, n_head=n_head)
+        self.conv_1d_1              = Conv1D(args=args,
+                                             in_dim=hidden,
+                                             out_dim=filter,
+                                             kernel_size=kernel[0])
+        self.relu                   = nn.ReLU()
+        self.conv_1d_2              = Conv1D(args=args,
+                                             in_dim=filter,
+                                             out_dim=hidden,
+                                             kernel_size=kernel[1])
+        self.layer_norm             = nn.LayerNorm(hidden)
+        self.dropout                = nn.Dropout(p=p)
 
     def forward(self, input):
         self.logger.info(f"Class: FeedForwardTransformer :: input.shape = {input.shape}")
@@ -49,7 +50,9 @@ class FeedForwardTransformer(nn.Module):
         after_layer_normalization   = self.layer_norm(after_skip_connection)    # Norm: Layer normalization 
 
         residual                    = after_layer_normalization
-        after_conv                  = self.conv_1d(after_layer_normalization)   # Conv1D
+        after_conv                  = self.conv_1d_1(after_layer_normalization)   # Conv1D
+        after_conv                  = self.relu(after_conv)
+        after_conv                  = self.conv_1d_2(after_conv)
         after_dropout               = self.dropout(after_conv)                  # Dropout
         after_skip_connection       = after_dropout + residual                  # Add (skip connection)
         after_layer_normalization   = self.layer_norm(after_skip_connection)    # Norm: Layer normalization
