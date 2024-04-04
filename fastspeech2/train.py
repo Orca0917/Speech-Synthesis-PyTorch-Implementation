@@ -51,11 +51,13 @@ def train(args):
         for x, y in tqdm(train_dataloader, total=len(train_dataloader)):
 
             pred_duration, pred_mel = model(x)
-            break
-            pass
-            # logger.info(f"Phoneme sequence's shape  : {x.shape}")
-            # logger.info(f"Mel-spectrogram's shape   : {y.shape}")
+            logger.info(f"Phoneme sequence's shape  : {x.shape}")
+            logger.info(f"Mel-spectrogram's shape   : {y.shape}")
 
+            logger.info(f"(model out) duration.shape : {pred_duration.shape}")
+            logger.info(f"(model out) melspectrogram.shape : {pred_mel.shape}")
+
+            break
             # for mel in y:
             #     show_melspectrogram(mel)
 

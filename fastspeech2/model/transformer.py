@@ -17,7 +17,7 @@ class Conv1D(nn.Module):
     def forward(self, input):
         self.logger.info(f"Class: Conv1D :: input: {input.shape}")  # (16, 139, 256)
         input = input.transpose(1, 2)
-        input = self.conv_1d(input)
+        input = self.conv(input)
         input = input.transpose(1, 2)
         return input
 
