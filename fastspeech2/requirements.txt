@@ -1,3 +1,6 @@
 fsspec
-g2p_en
+g2p_en # 필요없을 수도
 pandas
+textgrid==1.6.1
+tgt==1.5
+pyworld
