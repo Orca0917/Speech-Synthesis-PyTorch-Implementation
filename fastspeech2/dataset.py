@@ -35,6 +35,7 @@ class fastspeech2Dataset(Dataset):
         base_path       = "./preprocessed/"
         phoneme_seq     = os.path.join(base_path, "phoneme_seq", self.file_names[index] + ".npy")
         melspectrogram  = os.path.join(base_path, "melspectrogram", self.file_names[index] + ".npy")
+        text_grid       = os.path.join(base_path, "textgrid", self.file_names[index] + ".TextGrid")
 
         phoneme_seq     = np.load(phoneme_seq)      # 전처리 완료된 phoneme sequence
         melspectrogram  = np.load(melspectrogram)   # 전처리 완료된 mel spectrogram

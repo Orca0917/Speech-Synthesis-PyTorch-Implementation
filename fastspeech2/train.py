@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 
 from tqdm import tqdm
 from utils import log_config
+from textgrid import TextGrid
 from dataset import fastspeech2Dataset, collate_fn
 from torch.utils.data import DataLoader
 from model.fastspeech2 import FastSpeech2
