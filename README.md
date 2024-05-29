@@ -10,7 +10,11 @@ Below is a list of TTS models that have been completed or are currently in progr
 
 <br>
 
+<div align='center'>
+
 | id | name | paper | blog | year | status |
 |:--:|:--:|:--:|:--:|:--:|:--:|
-| 1 | tacotron | [ 🔗 link ](https://arxiv.org/abs/1703.10135) | [ 🔗 link](https://orca0917.github.io/posts/Tacotron/) | 2017 | `🚧 In progress` |
-| 2 | fastspeech2 | [ 🔗 link ](https://arxiv.org/abs/2006.04558) | [ 🔗 link ]() | 2020 | `🚧 In Progress` |
+| 1 | tacotron | [ 🔗 link ](https://arxiv.org/abs/1703.10135) | [ 🔗 link](https://orca0917.github.io/posts/Tacotron/) | 2017 | `✅ Done` |
+| 2 | fastspeech2 | [ 🔗 link ](https://arxiv.org/abs/2006.04558) | [ 🔗 link ](https://orca0917.github.io/posts/Fastspeech2/) | 2020 | `🚧 In Progress` |
+
+</div>
