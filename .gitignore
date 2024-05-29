@@ -163,3 +163,6 @@ LJSpeech-1.1
 .DS_Store
 preprocessed
 *.npy
+*.wav
+*.lab
+*.TextGrid
