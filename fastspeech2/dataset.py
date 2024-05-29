@@ -31,18 +31,27 @@ class fastspeech2Dataset(Dataset):
     
     def __getitem__(self, index):
         # X: text phoneme sequence
-        # y: waveform mel spectrogram
+        # y: waveform mel seq
         base_path       = "./preprocessed/"
         phoneme_seq     = os.path.join(base_path, "phoneme_seq", self.file_names[index] + ".npy")
         melspectrogram  = os.path.join(base_path, "melspectrogram", self.file_names[index] + ".npy")
-        text_grid       = os.path.join(base_path, "textgrid", self.file_names[index] + ".TextGrid")
+        duration        = os.path.join(base_path, "duration", self.file_names[index] + ".npy")
+        pitch           = os.path.join(base_path, "pitch", self.file_names[index] + ".npy")
+        energy          = os.path.join(base_path, "energy", self.file_names[index] + ".npy")
 
         phoneme_seq     = np.load(phoneme_seq)      # 전처리 완료된 phoneme sequence
-        melspectrogram  = np.load(melspectrogram)   # 전처리 완료된 mel spectrogram
+        melspectrogram  = np.load(melspectrogram)   # 전처리 완료된 mel seq
+        duration        = np.load(duration)
+        pitch           = np.load(pitch)
+        energy          = np.load(energy)
 
         phoneme_seq     = torch.tensor(phoneme_seq, dtype=torch.int32)
         melspectrogram  = torch.tensor(melspectrogram, dtype=torch.float32)
-        return phoneme_seq, melspectrogram
+        duration        = torch.tensor(duration, dtype=torch.int32)
+        pitch           = torch.tensor(pitch, dtype=torch.float32)
+        energy          = torch.tensor(energy, dtype=torch.float32)
+
+        return phoneme_seq, melspectrogram, duration, pitch, energy
 
 
 
@@ -50,11 +59,13 @@ def pad_sequence1D(seq):
     return nn.utils.rnn.pad_sequence(sequences=seq, batch_first=True, padding_value=0)
 
 
-def pad_sequence2D(mels, max_len):
-    B                   = len(mels)
-    padded_mel          = torch.zeros(B, 128, max_len) # 멜 스펙트로그램 차원 맞춰주기
-    for i, spectrogram in enumerate(mels):
-        padded_mel[i, :spectrogram.size(0), :spectrogram.size(1)] = spectrogram
+def pad_sequence2D(seqs):
+    B                   = len(seqs)
+    T                   = seqs[0].shape[1]
+    max_len             = max([len(seq[0]) for seq in seqs])
+    padded_mel          = torch.zeros(B, T, max_len) # 멜 스펙트로그램 차원 맞춰주기
+    for i, seq in enumerate(seqs):
+        padded_mel[i, :seq.size(0), :seq.size(1)] = seq
     return padded_mel
 
 
@@ -62,10 +73,15 @@ def collate_fn(batch):
 
     phoneme_sequences   = [item[0] for item in batch]
     melspectrograms     = [item[1] for item in batch]
-
-    max_mel_timestep    = max([len(mel[0]) for mel in melspectrograms])
+    durations           = [item[2] for item in batch]
+    pitches             = [item[3] for item in batch]
+    energy              = [item[4] for item in batch]
 
     padded_phoneme_seq  = pad_sequence1D(phoneme_sequences)     # 음소 시퀀스 차원 맞춰주기
-    padded_mel          = pad_sequence2D(melspectrograms, max_mel_timestep)
+    padded_mel          = pad_sequence2D(melspectrograms)
+    padded_duration     = pad_sequence1D(durations)
+    padded_pitch        = pad_sequence1D(pitches)
+    padded_energy       = pad_sequence1D(energy)
 
-    return padded_phoneme_seq, padded_mel
+
+    return padded_phoneme_seq, padded_mel, padded_duration, padded_pitch, padded_energy

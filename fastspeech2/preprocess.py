@@ -43,8 +43,8 @@ def get_pitch(spectrogram, duration, args):
     return pitch
 
 
-def get_energy(melspectrogram):
-    energy = np.sum(melspectrogram, axis=0)
+def get_energy(spectrogram):
+    energy = np.sum(np.abs(spectrogram) ** 2, axis=0)
     return energy
 
 
@@ -125,7 +125,7 @@ def preprocess(args):
                                       duration=one_wavfile_duration,
                                       args=args)
         
-        one_wavfile_energy = get_energy(melspectrogram=one_wavfile_melspectrogram)
+        one_wavfile_energy = get_energy(melspectrogram=one_wavfile_spectrogram)
 
         all_wavfile_phoneme         += [one_wavfile_phoneme]
         all_wavfile_melspectrogram  += [one_wavfile_melspectrogram]

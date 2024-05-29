@@ -110,7 +110,7 @@ class VarianceAdaptor(nn.Module):
         variance_adaptor_out = length_regulator_out + predicted_pitch + predicted_energy
         self.logger.info(f"Class: VarianceAdaoptr :: variance_adaptor_out {variance_adaptor_out.shape}")
 
-        return predicted_duration, variance_adaptor_out
+        return predicted_duration, predicted_pitch, predicted_energy, variance_adaptor_out
 
 
 
@@ -199,7 +199,12 @@ class FastSpeech2(nn.Module):
         self.logger.info(f"Class: FastSpeech2 :: encoder_out.shape = {encoder_out.shape}")
 
         # phoneme sequence에 발화 길이, 높낮이, 세기 정보를 추가
-        pred_duration, variance_adaptor_out = self.variance_adaptor(encoder_out)
+        (
+            pred_duration, 
+            pred_pitch,
+            pred_energy,
+            variance_adaptor_out
+        ) = self.variance_adaptor(encoder_out)
         self.logger.info(f"Class: FastSpeech2 :: variance_adaptor_out.shape = {variance_adaptor_out.shape}")
 
         # positional encoding transformer 이전 한번 더 추가
@@ -215,4 +220,4 @@ class FastSpeech2(nn.Module):
         self.logger.info(f"Class: FastSpeech2 :: pred_mel.shape = {pred_mel.shape}")
 
 
-        return pred_duration, pred_mel
+        return pred_duration, pred_pitch, pred_energy, pred_mel

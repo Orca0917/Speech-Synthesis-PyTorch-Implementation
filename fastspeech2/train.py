@@ -5,7 +5,7 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 
-from tqdm import tqdm
+from tqdm.auto import tqdm
 from utils import log_config
 from textgrid import TextGrid
 from dataset import fastspeech2Dataset, collate_fn
@@ -49,14 +49,22 @@ def train(args):
     for epoch in range(args.epoch):
 
         model.train()
-        for x, y in tqdm(train_dataloader, total=len(train_dataloader)):
+        for seq, y_mel, y_dur, y_pitch, y_energy in tqdm(train_dataloader, total=len(train_dataloader)):
 
-            pred_duration, pred_mel = model(x)
-            logger.info(f"Phoneme sequence's shape  : {x.shape}")
-            logger.info(f"Mel-spectrogram's shape   : {y.shape}")
+            pred_dur, pred_pitch, pred_energy, pred_mel = model(seq)
+            logger.info(f"Phoneme sequence's shape  : {seq.shape}")
 
-            logger.info(f"(model out) duration.shape : {pred_duration.shape}")
+            logger.info(f"(model out) duration.shape : {pred_dur.shape}")
+            logger.info(f"(answer) duration.shape : {y_dur.shape}")
+
             logger.info(f"(model out) melspectrogram.shape : {pred_mel.shape}")
+            logger.info(f"(answer) mel-spectrogram's shape   : {y_mel.shape}")
+
+            logger.info(f"(model out) pitch.shape : {pred_pitch.shape}")
+            logger.info(f"(answer) pitch.shape : {y_pitch.shape}")
+
+            logger.info(f"(model out) energy.shape : {pred_energy.shape}")
+            logger.info(f"(answer) energy.shape : {y_energy.shape}")
 
             break
             # for mel in y:

@@ -1,0 +1,136 @@
+a	AA1
+a	AH0
+all	AH0 L
+all	AO1 L
+although	AO2 L DH OW1
+and	AE0 N D
+and	AE1 N D
+and	AE2 N D
+and	AH0 N D
+are	AA1 R
+are	AA1 R IY0
+are	EH1 R
+are	EH1 R IY0
+are	ER0
+art	AA0 R T
+art	AA1 R T
+art	AA2 R T
+arts	AA1 R T S
+as	AE1 Z
+as	AH0 S
+as	AH0 Z
+at	AA1 T
+at	AE0 T
+at	AE1 T
+at	AE2 T
+at	AH0 T
+at	EY1 T IY1
+be	B
+be	B EY1
+be	B IY0
+before	B IH0 F AO1 R
+before	B IY2 F AO1 R
+being	B IY1 IH0 NG
+block	B L AA1 K
+block	B L AA2 K
+blocks	B L AA1 K S
+book	B UH1 K
+book	B UH2 K
+books	B UH1 K S
+books	B UH2 K S
+by	B AY1
+by	B IY0
+centuries	S EH0 N T UH1 R IY0 Z
+centuries	S EH1 N CH ER0 IY0 Z
+century	S EH1 N CH ER0 IY0
+chinese	CH AY0 N IY1 Z
+comparatively	K AH0 M P EH1 R AH0 T IH0 V L IY0
+concerned	K AH0 N S ER1 N D
+considered	K AH0 N S IH1 D ER0 D
+crafts	K R AE1 F S
+crafts	K R AE1 F T S
+differs	D IH1 F ER0 Z
+differs	D IH2 F ER0 Z
+engraved	IH0 N G R EY1 V D
+exhibition	EH2 K S AH0 B IH1 SH AH0 N
+fifteenth	F IH0 F T IY1 N TH
+for	F AO1 R
+for	F AO2 R
+for	F ER0
+from	F R AA1 M
+from	F R AH1 M
+if	AY1 F
+if	IH1 F
+immediate	IH0 M IY1 D IY0 AH0 T
+immediate	IH0 M IY1 D IY0 IH0 T
+impressions	IH0 M P R EH1 SH AH0 N Z
+in	IH0 N
+in	IH1 N
+in	IH2 N
+invention	IH0 N V EH1 N CH AH0 N
+invention	IH0 N V EH1 N SH AH0 N
+justly	JH AH1 S T L IY0
+letters	L EH1 T ER0 Z
+may	M EY0
+may	M EY1
+metal	M EH1 T AH0 L
+middle	M IH1 D AH0 L
+modern	M AA1 D ER0 N
+most	M OW1 S T
+most	M OW2 S T
+movable	M UW1 V AH0 B AH0 L
+netherlands	N EH1 DH ER0 L AH0 N D Z
+not	N AA0 T
+not	N AA1 T
+not	N AA2 T
+not	N OW0
+of	AA1 F
+of	AH0 V
+of	AH1 V
+of	AO0 F
+of	AO1 F
+only	AO1 N L IY0
+predecessors	P R EH1 D AH0 S EH2 S ER0 Z
+present	P ER0 Z EH1 N T
+present	P R IH0 Z EH1 N T
+present	P R IY0 Z EH1 N T
+printed	P R IH1 N IH0 D
+printed	P R IH1 N T IH0 D
+printing	P R IH1 N IH0 NG
+printing	P R IH1 N T IH0 NG
+process	P R AA1 S EH0 S
+process	P R AA1 S EH2 S
+process	P R OW0 S EH1 S
+process	P R OW0 S EH2 S
+process	P R S EH2 S
+produced	P R AH0 D UW1 S T
+relief	R IH0 L IY1 F
+relief	R IY0 L IY1 F
+represented	R EH2 P R AH0 Z EH1 N AH0 D
+represented	R EH2 P R AH0 Z EH1 N IH0 D
+represented	R EH2 P R AH0 Z EH1 N T AH0 D
+represented	R EH2 P R IH0 Z EH1 N AH0 D
+represented	R EH2 P R IH0 Z EH1 N IH0 D
+represented	R EH2 P R IH0 Z EH1 N T IH0 D
+sense	S EH1 N S
+similar	S IH1 M AH0 L ER0
+similar	S IH2 M AH0 L ER0
+the	DH
+the	TH
+the	TH IY0
+took	T UH1 K
+true	T R UW1
+we	W
+we	W IY1
+were	W ER0
+were	W ER1
+which	HH W IH0 CH
+which	HH W IH1 CH
+which	W IH1 CH
+with	W IH0 DH
+with	W IH0 TH
+with	W IH1 TH
+wood	W UH0 D
+wood	W UH1 D
+wood	W UH2 D
+woodcutters	W UH1 D K AH2 T ER0 Z
